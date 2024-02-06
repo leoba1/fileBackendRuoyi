@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.bai.mapper.OperationlogMapper">
+
+    <resultMap type="Operationlog" id="OperationlogResult">
+        <result property="operationLogId"    column="operationLogId"    />
+        <result property="detail"    column="detail"    />
+        <result property="logLevel"    column="logLevel"    />
+        <result property="operation"    column="operation"    />
+        <result property="operationObj"    column="operationObj"    />
+        <result property="platform"    column="platform"    />
+        <result property="requestMethod"    column="requestMethod"    />
+        <result property="requestURI"    column="requestURI"    />
+        <result property="result"    column="result"    />
+        <result property="source"    column="source"    />
+        <result property="terminal"    column="terminal"    />
+        <result property="time"    column="time"    />
+        <result property="userId"    column="userId"    />
+    </resultMap>
+
+    <sql id="selectOperationlogVo">
+        select operationLogId, detail, logLevel, operation, operationObj, platform, requestMethod, requestURI, result, source, terminal, time, userId from operationlog
+    </sql>
+
+    <select id="selectOperationlogList" parameterType="Operationlog" resultMap="OperationlogResult">
+        <include refid="selectOperationlogVo"/>
+        <where>
+            <if test="operationLogId != null "> and operationLogId = #{operationLogId}</if>
+            <if test="userId != null  and userId != ''"> and userId = #{userId}</if>
+        </where>
+    </select>
+
+    <select id="selectOperationlogByOperationLogId" parameterType="Long" resultMap="OperationlogResult">
+        <include refid="selectOperationlogVo"/>
+        where operationLogId = #{operationLogId}
+    </select>
+
+    <insert id="insertOperationlog" parameterType="Operationlog" useGeneratedKeys="true" keyProperty="operationLogId">
+        insert into operationlog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="detail != null">detail,</if>
+            <if test="logLevel != null">logLevel,</if>
+            <if test="operation != null">operation,</if>
+            <if test="operationObj != null">operationObj,</if>
+            <if test="platform != null">platform,</if>
+            <if test="requestMethod != null">requestMethod,</if>
+            <if test="requestURI != null">requestURI,</if>
+            <if test="result != null">result,</if>
+            <if test="source != null">source,</if>
+            <if test="terminal != null">terminal,</if>
+            <if test="time != null">time,</if>
+            <if test="userId != null">userId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="detail != null">#{detail},</if>
+            <if test="logLevel != null">#{logLevel},</if>
+            <if test="operation != null">#{operation},</if>
+            <if test="operationObj != null">#{operationObj},</if>
+            <if test="platform != null">#{platform},</if>
+            <if test="requestMethod != null">#{requestMethod},</if>
+            <if test="requestURI != null">#{requestURI},</if>
+            <if test="result != null">#{result},</if>
+            <if test="source != null">#{source},</if>
+            <if test="terminal != null">#{terminal},</if>
+            <if test="time != null">#{time},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOperationlog" parameterType="Operationlog">
+        update operationlog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="detail != null">detail = #{detail},</if>
+            <if test="logLevel != null">logLevel = #{logLevel},</if>
+            <if test="operation != null">operation = #{operation},</if>
+            <if test="operationObj != null">operationObj = #{operationObj},</if>
+            <if test="platform != null">platform = #{platform},</if>
+            <if test="requestMethod != null">requestMethod = #{requestMethod},</if>
+            <if test="requestURI != null">requestURI = #{requestURI},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="terminal != null">terminal = #{terminal},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="userId != null">userId = #{userId},</if>
+        </trim>
+        where operationLogId = #{operationLogId}
+    </update>
+
+    <delete id="deleteOperationlogByOperationLogId" parameterType="Long">
+        delete from operationlog where operationLogId = #{operationLogId}
+    </delete>
+
+    <delete id="deleteOperationlogByOperationLogIds" parameterType="String">
+        delete from operationlog where operationLogId in
+        <foreach item="operationLogId" collection="array" open="(" separator="," close=")">
+            #{operationLogId}
+        </foreach>
+    </delete>
+</mapper>
