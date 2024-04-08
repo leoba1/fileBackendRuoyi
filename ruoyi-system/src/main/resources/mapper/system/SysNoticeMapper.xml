@@ -62,13 +62,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 
     </insert><insert id="insertNotice2" parameterType="SysNotice">
-    insert into notice (content,createTime,isLongValidData,title,modifyTime,platform)values(
+    insert into notice (content,createTime,isLongValidData,title,modifyTime,platform,validDateTime)values(
     <if test="noticeContent != null and noticeContent != ''">#{noticeContent}, </if>
     sysdate(),
     1,
     <if test="noticeTitle != null and noticeTitle != ''">#{noticeTitle}, </if>
     sysdate(),
-    3
+    3,"0"
     )
     </insert>
 
