@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.bai.mapper.UserfileMapper">
+
+    <resultMap type="Userfile" id="UserfileResult">
+        <result property="userFileId"    column="userFileId"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="createUserId"    column="createUserId"    />
+        <result property="deleteBatchNum"    column="deleteBatchNum"    />
+        <result property="deleteFlag"    column="deleteFlag"    />
+        <result property="deleteTime"    column="deleteTime"    />
+        <result property="extendName"    column="extendName"    />
+        <result property="fileId"    column="fileId"    />
+        <result property="fileName"    column="fileName"    />
+        <result property="filePath"    column="filePath"    />
+        <result property="isDir"    column="isDir"    />
+        <result property="modifyTime"    column="modifyTime"    />
+        <result property="modifyUserId"    column="modifyUserId"    />
+        <result property="uploadTime"    column="uploadTime"    />
+        <result property="userId"    column="userId"    />
+    </resultMap>
+
+    <sql id="selectUserfileVo">
+        select userFileId, createTime, createUserId, deleteBatchNum, deleteFlag, deleteTime, extendName, fileId, fileName, filePath, isDir, modifyTime, modifyUserId, uploadTime, userId from userfile
+    </sql>
+
+    <select id="selectUserfileList" parameterType="Userfile" resultMap="UserfileResult">
+        <include refid="selectUserfileVo"/>
+        <where>
+            <if test="userFileId != null  and userFileId != ''"> and userFileId = #{userFileId}</if>
+            <if test="createUserId != null  and createUserId != ''"> and createUserId = #{createUserId}</if>
+            <if test="deleteTime != null  and deleteTime != ''"> and deleteTime = #{deleteTime}</if>
+            <if test="fileName != null  and fileName != ''"> and fileName like concat('%', #{fileName}, '%')</if>
+            <if test="modifyUserId != null  and modifyUserId != ''"> and modifyUserId = #{modifyUserId}</if>
+            <if test="userId != null "> and userId = #{userId}</if>
+        </where>
+    </select>
+
+    <select id="selectUserfileByUserFileId" parameterType="String" resultMap="UserfileResult">
+        <include refid="selectUserfileVo"/>
+        where userFileId = #{userFileId}
+    </select>
+
+    <insert id="insertUserfile" parameterType="Userfile">
+        insert into userfile
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userFileId != null">userFileId,</if>
+            <if test="createTime != null">createTime,</if>
+            <if test="createUserId != null">createUserId,</if>
+            <if test="deleteBatchNum != null">deleteBatchNum,</if>
+            <if test="deleteFlag != null">deleteFlag,</if>
+            <if test="deleteTime != null">deleteTime,</if>
+            <if test="extendName != null">extendName,</if>
+            <if test="fileId != null">fileId,</if>
+            <if test="fileName != null">fileName,</if>
+            <if test="filePath != null">filePath,</if>
+            <if test="isDir != null">isDir,</if>
+            <if test="modifyTime != null">modifyTime,</if>
+            <if test="modifyUserId != null">modifyUserId,</if>
+            <if test="uploadTime != null">uploadTime,</if>
+            <if test="userId != null">userId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userFileId != null">#{userFileId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createUserId != null">#{createUserId},</if>
+            <if test="deleteBatchNum != null">#{deleteBatchNum},</if>
+            <if test="deleteFlag != null">#{deleteFlag},</if>
+            <if test="deleteTime != null">#{deleteTime},</if>
+            <if test="extendName != null">#{extendName},</if>
+            <if test="fileId != null">#{fileId},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="isDir != null">#{isDir},</if>
+            <if test="modifyTime != null">#{modifyTime},</if>
+            <if test="modifyUserId != null">#{modifyUserId},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserfile" parameterType="Userfile">
+        update userfile
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="createUserId != null">createUserId = #{createUserId},</if>
+            <if test="deleteBatchNum != null">deleteBatchNum = #{deleteBatchNum},</if>
+            <if test="deleteFlag != null">deleteFlag = #{deleteFlag},</if>
+            <if test="deleteTime != null">deleteTime = #{deleteTime},</if>
+            <if test="extendName != null">extendName = #{extendName},</if>
+            <if test="fileId != null">fileId = #{fileId},</if>
+            <if test="fileName != null">fileName = #{fileName},</if>
+            <if test="filePath != null">filePath = #{filePath},</if>
+            <if test="isDir != null">isDir = #{isDir},</if>
+            <if test="modifyTime != null">modifyTime = #{modifyTime},</if>
+            <if test="modifyUserId != null">modifyUserId = #{modifyUserId},</if>
+            <if test="uploadTime != null">uploadTime = #{uploadTime},</if>
+            <if test="userId != null">userId = #{userId},</if>
+        </trim>
+        where userFileId = #{userFileId}
+    </update>
+
+    <delete id="deleteUserfileByUserFileId" parameterType="String">
+        delete from userfile where userFileId = #{userFileId}
+    </delete>
+
+    <delete id="deleteUserfileByUserFileIds" parameterType="String">
+        update userfile set deleteFlag = 1
+        where userFileId in
+        <foreach item="userFileId" collection="array" open="(" separator="," close=")">
+            #{userFileId}
+        </foreach>
+    </delete>
+</mapper>

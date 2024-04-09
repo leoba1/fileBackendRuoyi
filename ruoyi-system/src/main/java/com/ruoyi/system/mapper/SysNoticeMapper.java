@@ -42,6 +42,7 @@ public interface SysNoticeMapper
      * @return 结果
      */
     public int updateNotice(SysNotice notice);
+//    public int updateNotice2(SysNotice notice);
 
     /**
      * 批量删除公告

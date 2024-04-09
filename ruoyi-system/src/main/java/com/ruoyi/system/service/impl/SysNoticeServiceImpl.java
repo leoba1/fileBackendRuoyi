@@ -64,6 +64,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     @Override
     public int updateNotice(SysNotice notice)
     {
+//        noticeMapper.updateNotice2(notice);
         return noticeMapper.updateNotice(notice);
     }
 
