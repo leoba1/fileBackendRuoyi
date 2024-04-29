@@ -24,7 +24,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 用户Controller
  *
- * @author ruoyi
+ * @author bai
  * @date 2024-01-27
  */
 @RestController

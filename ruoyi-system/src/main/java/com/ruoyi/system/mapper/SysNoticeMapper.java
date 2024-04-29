@@ -6,7 +6,7 @@ import com.ruoyi.system.domain.SysNotice;
 /**
  * 通知公告表 数据层
  *
- * @author ruoyi
+ * @author bai
  */
 public interface SysNoticeMapper
 {
@@ -59,4 +59,8 @@ public interface SysNoticeMapper
      * @return 结果
      */
     public int deleteNoticeByIds(Long[] noticeIds);
+
+    void deleteNoticeById2(Long noticeId);
+
+    void deleteNoticeByIds2(Long[] noticeIds);
 }

@@ -6,7 +6,7 @@ import com.ruoyi.system.bai.domain.User;
 /**
  * 用户Mapper接口
  *
- * @author ruoyi
+ * @author bai
  * @date 2024-01-27
  */
 public interface UserMapper

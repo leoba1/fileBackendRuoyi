@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <insert id="insertNotice" parameterType="SysNotice">
         insert into sys_notice (
+                                notice_id,
 			<if test="noticeTitle != null and noticeTitle != '' ">notice_title, </if>
 			<if test="noticeType != null and noticeType != '' ">notice_type, </if>
 			<if test="noticeContent != null and noticeContent != '' ">notice_content, </if>
@@ -52,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			create_time
  		)values(
+ 		        #{noticeId},
 			<if test="noticeTitle != null and noticeTitle != ''">#{noticeTitle}, </if>
 			<if test="noticeType != null and noticeType != ''">#{noticeType}, </if>
 			<if test="noticeContent != null and noticeContent != ''">#{noticeContent}, </if>
@@ -62,7 +64,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 
     </insert><insert id="insertNotice2" parameterType="SysNotice">
-    insert into notice (content,createTime,isLongValidData,title,modifyTime,platform,validDateTime)values(
+    insert into notice (noticeId,content,createTime,isLongValidData,title,modifyTime,platform,validDateTime)values(
+    #{noticeId},
     <if test="noticeContent != null and noticeContent != ''">#{noticeContent}, </if>
     sysdate(),
     1,
@@ -100,9 +103,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteNoticeById" parameterType="Long">
         delete from sys_notice where notice_id = #{noticeId}
     </delete>
+    <delete id="deleteNoticeById2" parameterType="Long">
+        delete from notice where noticeId = #{noticeId}
+    </delete>
 
     <delete id="deleteNoticeByIds" parameterType="Long">
         delete from sys_notice where notice_id in
+        <foreach item="noticeId" collection="array" open="(" separator="," close=")">
+            #{noticeId}
+        </foreach>
+    </delete>
+    <delete id="deleteNoticeByIds2" parameterType="Long">
+        delete from notice where noticeId in
         <foreach item="noticeId" collection="array" open="(" separator="," close=")">
             #{noticeId}
         </foreach>

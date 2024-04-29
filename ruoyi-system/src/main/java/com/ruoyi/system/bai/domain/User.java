@@ -8,7 +8,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 用户对象 user
  *
- * @author ruoyi
+ * @author bai
  * @date 2024-01-27
  */
 public class User extends BaseEntity

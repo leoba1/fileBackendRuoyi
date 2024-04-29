@@ -1,6 +1,9 @@
 package com.ruoyi.system.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.domain.SysNotice;
@@ -10,7 +13,7 @@ import com.ruoyi.system.service.ISysNoticeService;
 /**
  * 公告 服务层实现
  *
- * @author ruoyi
+ * @author bai
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService
@@ -51,6 +54,8 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     @Override
     public int insertNotice(SysNotice notice)
     {
+        long id = UUID.randomUUID().hashCode() & 0xfffffff;
+        notice.setNoticeId(id);
         noticeMapper.insertNotice2(notice);
         return noticeMapper.insertNotice(notice);
     }
@@ -77,6 +82,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     @Override
     public int deleteNoticeById(Long noticeId)
     {
+        noticeMapper.deleteNoticeById2(noticeId);
         return noticeMapper.deleteNoticeById(noticeId);
     }
 
@@ -89,6 +95,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService
     @Override
     public int deleteNoticeByIds(Long[] noticeIds)
     {
+        noticeMapper.deleteNoticeByIds2(noticeIds);
         return noticeMapper.deleteNoticeByIds(noticeIds);
     }
 }

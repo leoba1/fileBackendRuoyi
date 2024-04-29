@@ -10,7 +10,7 @@ import com.ruoyi.system.bai.service.IUserService;
 /**
  * 用户Service业务层处理
  *
- * @author ruoyi
+ * @author bai
  * @date 2024-01-27
  */
 @Service

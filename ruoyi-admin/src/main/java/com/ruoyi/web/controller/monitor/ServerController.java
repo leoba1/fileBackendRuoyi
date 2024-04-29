@@ -9,8 +9,8 @@ import com.ruoyi.framework.web.domain.Server;
 
 /**
  * 服务器监控
- * 
- * @author ruoyi
+ *
+ * @author bai
  */
 @RestController
 @RequestMapping("/monitor/server")
